@@ -6,7 +6,7 @@
 	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	<PackageTags>AspNetCore;Middleware</PackageTags>
 	<Description>Common components when build Asp.Net Core application.</Description>
-	<PackageProjectUrl>http://kipmovin.me:5555/packages/TechnicalLover.Common.AspNetCore</PackageProjectUrl>
+	<PackageProjectUrl>https://github.com/TechnicalLover/technicallover.common</PackageProjectUrl>
 	<Company>TechnicalLover</Company>
 	<Authors>TechnicalLover</Authors>
   </PropertyGroup>
