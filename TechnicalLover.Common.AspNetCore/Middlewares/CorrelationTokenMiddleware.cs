@@ -3,34 +3,34 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using LibOwin;
 using Serilog.Context;
+using TechnicalLover.Common.AspNetCore.Constants;
 
 namespace TechnicalLover.Common.AspNetCore.Middlewares
 {
+    using HttpContext = IDictionary<string, object>;
     using AppFunc = Func<IDictionary<string, object>, Task>;
 
-    public class CorrelationTokenMiddleware
+    public class CorrelationTokenMiddleware : BaseMiddleware<HttpContext, AppFunc>
     {
-        private readonly AppFunc next;
-
         public CorrelationTokenMiddleware(AppFunc next)
+            : base(next)
         {
-            this.next = next;
         }
 
-        public async Task Invoke(IDictionary<string, object> env)
+        public override async Task Invoke(HttpContext context)
         {
             Guid correlationToken;
-            var context = new OwinContext(env);
-            if ((context.Request.Headers["Correlation-Token"] != null
-                && Guid.TryParse(context.Request.Headers["Correlation-Token"], out correlationToken)))
+            var owinContext = new OwinContext(context);
+            if ((owinContext.Request.Headers[RequestHeaderConstants.CorrelationToken] != null
+                && Guid.TryParse(owinContext.Request.Headers[RequestHeaderConstants.CorrelationToken], out correlationToken)))
                 correlationToken = Guid.NewGuid();
 
             // add correlation token to OWIN context
-            context.Set("correlationToken", correlationToken.ToString());
+            owinContext.Set(OwinContextConstants.CorrelationToken, correlationToken.ToString());
 
             // add correlation token to Serilog log context
-            using (LogContext.PushProperty("CorrelationToken", correlationToken))
-                await next(env);
+            using (LogContext.PushProperty(LogContextPropertyConstants.CorrelationToken, correlationToken))
+                await next(context);
         }
     }
 }

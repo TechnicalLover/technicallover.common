@@ -2,17 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.0-alpha</Version>
+    <Version>1.0.0</Version>
 	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	<PackageTags>AspNetCore;Middleware</PackageTags>
 	<Description>Common components when build Asp.Net Core application.</Description>
-	<PackageProjectUrl></PackageProjectUrl>
+	<PackageProjectUrl>http://kipmovin.me:5555/packages/TechnicalLover.Common.AspNetCore</PackageProjectUrl>
 	<Company>TechnicalLover</Company>
 	<Authors>TechnicalLover</Authors>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TechnicalLover.Common\TechnicalLover.Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,11 +6,11 @@ using LibOwin;
 
 namespace TechnicalLover.Common.AspNetCore.Middlewares
 {
+    using HttpContext = IDictionary<string, object>;
     using AppFunc = Func<IDictionary<string, object>, Task>;
 
-    public class MonitoringMiddleware
+    public class MonitoringMiddleware : BaseMiddleware<HttpContext, AppFunc>
     {
-        private AppFunc next;
         private readonly Func<Task<bool>> healthCheck;
 
         private static readonly PathString monitorPath =
@@ -21,18 +21,18 @@ namespace TechnicalLover.Common.AspNetCore.Middlewares
             new PathString("/_monitor/deep");
 
         public MonitoringMiddleware(AppFunc next, Func<Task<bool>> healthCheck)
+            : base(next)
         {
-            this.healthCheck = healthCheck;
-            this.next = next;
+            this.healthCheck = healthCheck ?? throw new ArgumentNullException(nameof(healthCheck));
         }
 
-        public Task Invoke(IDictionary<string, object> env)
+        public override Task Invoke(HttpContext context)
         {
-            var context = new OwinContext(env);
-            if (context.Request.Path.StartsWithSegments(monitorPath))
-                return ShallowEndpoint(context);
+            var owinContext = new OwinContext(context);
+            if (owinContext.Request.Path.StartsWithSegments(monitorPath))
+                return ShallowEndpoint(owinContext);
             else
-                return this.next(env);
+                return this.next(context);
         }
 
         private Task HandleMonitorEndpoint(OwinContext context)

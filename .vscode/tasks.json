@@ -109,7 +109,7 @@
                 "add",
                 "${workspaceFolder}/${input:targetProject}",
                 "reference",
-                "${input:referenceToAdd}"
+                "./${input:referenceToAdd}/${input:referenceToAdd}.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
@@ -120,6 +120,7 @@
             "description": "Solution/Project:",
             "options": [
                 "TechnicalLover.Common.sln",
+                "TechnicalLover.Common",
                 "TechnicalLover.Common.AspNetCore"
             ],
             "default": "TechnicalLover.Common.sln",
@@ -135,7 +136,10 @@
         {
             "id": "targetProject",
             "description": "Project:",
-            "options": ["TechnicalLover.Common.AspNetCore"],
+            "options": [
+                "TechnicalLover.Common.AspNetCore",
+                "TechnicalLover.Common"
+            ],
             "default": "TechnicalLover.Common.AspNetCore",
             "type": "pickString"
         },
@@ -170,7 +174,7 @@
         {
             "id": "referenceToAdd",
             "description": "Path to reference (.csproj file):",
-            "default": "./{ClassLibProject}/{ClassLibProject}.csproj",
+            "default": "ClassLibProject",
             "type": "promptString"
         }
     ]
