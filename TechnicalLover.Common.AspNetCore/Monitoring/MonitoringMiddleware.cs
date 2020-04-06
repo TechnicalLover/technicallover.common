@@ -4,7 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using LibOwin;
 
-namespace TechnicalLover.Common.AspNetCore.Middlewares
+namespace TechnicalLover.Common.AspNetCore.Monitoring
 {
     using HttpContext = IDictionary<string, object>;
     using AppFunc = Func<IDictionary<string, object>, Task>;

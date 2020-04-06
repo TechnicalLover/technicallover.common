@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace TechnicalLover.Common.AspNetCore.Middlewares
+namespace TechnicalLover.Common.AspNetCore
 {
     public abstract class BaseMiddleware<TContext, TRequestDelegate>
     {

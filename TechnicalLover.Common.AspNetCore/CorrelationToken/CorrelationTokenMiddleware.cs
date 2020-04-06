@@ -5,7 +5,7 @@ using LibOwin;
 using Serilog.Context;
 using TechnicalLover.Common.AspNetCore.Constants;
 
-namespace TechnicalLover.Common.AspNetCore.Middlewares
+namespace TechnicalLover.Common.AspNetCore.CorrelationToken
 {
     using HttpContext = IDictionary<string, object>;
     using AppFunc = Func<IDictionary<string, object>, Task>;

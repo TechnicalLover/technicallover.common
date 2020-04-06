@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Serilog;
 
-namespace TechnicalLover.Common.AspNetCore.Middlewares
+namespace TechnicalLover.Common.AspNetCore.ErrorHandling
 {
     using HttpContext = IDictionary<string, object>;
     using AppFunc = Func<IDictionary<string, object>, Task>;

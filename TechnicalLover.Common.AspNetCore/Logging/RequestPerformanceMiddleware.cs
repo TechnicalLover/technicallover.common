@@ -5,7 +5,7 @@ using LibOwin;
 using Serilog;
 using TechnicalLover.Common.Extensions;
 
-namespace TechnicalLover.Common.AspNetCore.Middlewares
+namespace TechnicalLover.Common.AspNetCore.Logging
 {
     using HttpContext = IDictionary<string, object>;
     using AppFunc = Func<IDictionary<string, object>, Task>;
